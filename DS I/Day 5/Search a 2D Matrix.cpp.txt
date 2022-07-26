@@ -1,0 +1,31 @@
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int row = 0;
+        int m = matrix.length;
+        int n = matrix[0].length;
+        for (int i=0; i<m; i++) {
+            if (matrix[i][0] <= target)
+                row = i;
+        }
+
+        return searchRow(matrix, 0, n - 1, target, row);
+    }
+    
+    public boolean searchRow(int[][] matrix, int l, int r, int target, int row) {
+        if (l>r) {
+            return false;
+        }
+        
+        int mid = (l+r) / 2;
+        
+        if (matrix[row][mid] == target) {
+            return true;
+        }
+        
+        if (target > matrix[row][mid]) {
+            return searchRow(matrix, mid+1, r, target, row);
+        } else {
+            return searchRow(matrix, l, mid - 1, target, row);
+        }
+    }
+}
