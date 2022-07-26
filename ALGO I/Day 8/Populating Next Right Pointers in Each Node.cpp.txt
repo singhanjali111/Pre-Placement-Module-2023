@@ -1,0 +1,19 @@
+class Solution {
+    public Node connect(Node root) {
+      doIt(root, null);
+      return root;
+    }
+    public void doIt(Node root, Node next){
+        if(root == null){
+            return;
+        }
+        root.next = next;
+        doIt(root.left,root.right);
+        if(next == null){
+            doIt(root.right,null);
+        }
+        else{
+            doIt(root.right, next.left);
+        }
+    }
+}
